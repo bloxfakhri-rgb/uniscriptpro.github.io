@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uni Script Pro | FakhriPro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff0000;
+            --bg: #000000;
+            --card: #0d0d0d;
+            --border: #440000;
+            --wait: #ffcc00;
+            --success: #25D366;
+            --info: #0084ff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card);
+            width: 100%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary);
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px #330000;
+        }
+
+        .warning-text {
+            color: var(--wait);
+            font-size: 0.65rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        label { display: block; text-align: left; margin: 15px 0 5px; font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: bold; }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: white;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .char-count { text-align: right; font-size: 0.65rem; color: #666; margin-top: 5px; }
+
+        .btn-main {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.6rem;
+        }
+
+        .action-buttons { display: none; margin-top: 20px; flex-direction: column; }
+        
+        .btn-step {
+            display: block;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.5rem;
+            margin-bottom: 12px;
+            border: 2px solid white;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .btn-group { background: var(--info); color: white; }
+        .btn-whatsapp { background: var(--success); color: black; }
+
+        #waiting-msg {
+            margin-top: 10px;
+            padding: 15px;
+            border: 1px solid var(--wait);
+            background: rgba(255, 204, 0, 0.1);
+            color: var(--wait);
+            font-size: 0.7rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .footer { text-align: center; font-size: 0.7rem; margin-top: 30px; color: #444; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>UNI SCRIPT PRO</h1>
+    <span class="warning-text">⚠️ HANYA UNTUK 1 SISTEM SKRIP!</span>
+
+    <label>ID AKUN UNI MU:</label>
+    <input type="text" id="accountId" placeholder="Contoh = L5DSB1G">
+
+    <label>Deskripsi (Huruf & Angka):</label>
+    <textarea id="desc" rows="4" placeholder="Jelaskan sistem skripmu..." oninput="checkChars()"></textarea>
+    <div class="char-count"><span id="current-char">0</span>/250 Karakter</div>
+
+    <button class="btn-main" id="processBtn" onclick="startProcess()">SIAPKAN DATA</button>
+
+    <div class="action-buttons" id="actionArea">
+        <a href="whatsapp://chat?code=Bb0eqy4jeFwL1pMgpLBhzO" class="btn-step btn-group">1. MASUK GRUP JIKA BELUM MASUK</a>
+        
+        <a href="#" id="waFinalBtn" class="btn-step btn-whatsapp">2. KIRIM KE GRUP UNI SCRIPT PRO</a>
+        
+        <div id="waiting-msg">
+            🚀 <b>INSTRUKSI:</b><br>
+            Klik tombol 1 untuk masuk grup. Setelah itu kembali dan klik tombol 2 untuk kirim data skrip.<br><br>
+            Tunggu balasan: <br>
+            <span style="color: white; font-family: 'Press Start 2P'; font-size: 0.5rem; display: block; margin-top: 10px; border: 1px solid white; padding: 10px; text-align: center;">"@NAMAWAMU" DITERIMA!</span>
+        </div>
+    </div>
+
+    <div class="footer">MADE BY FAKHRIPRO</div>
+</div>
+
+<script>
+    function checkChars() {
+        const text = document.getElementById('desc').value;
+        document.getElementById('current-char').innerText = text.length;
+    }
+
+    function startProcess() {
+        const idAkun = document.getElementById('accountId').value;
+        const desc = document.getElementById('desc').value;
+        
+        if (!idAkun || !desc) return alert("Harap isi ID dan Deskripsi!");
+
+        const textRaw = 
+            "*🔥 NEW REQUEST - UNI SCRIPT PRO*\n" +
+            "*ID Akun:* " + idAkun + "\n" +
+            "----------------------------\n" +
+            "*Sistem:* " + desc + "\n" +
+            "----------------------------\n" +
+            "_Mohon diproses, FakhriPro!_";
+
+        const textWA = encodeURIComponent(textRaw);
+
+        document.getElementById('processBtn').style.display = "none";
+        document.getElementById('actionArea').style.display = "flex";
+        
+        // Link kirim chat
+        document.getElementById('waFinalBtn').href = "whatsapp://send?text=" + textWA;
+    }
+</script>
+
+</body>
+</html>
